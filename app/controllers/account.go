@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"database/sql"
-	"myapp/app"
 
 	"github.com/revel/revel"
+	"github.com/underthepixel/humvee/app"
 )
 
 type Account struct {
