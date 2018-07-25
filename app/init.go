@@ -11,7 +11,7 @@ var DB *sql.DB
 
 func InitDB() {
 	var err error
-	DB, err = sql.Open("mysql", "root:1236@tcp(35.239.46.64)/game")
+	DB, err = sql.Open("mysql", "root:1236@tcp(35.239.46.64:3306)/game")
 	if err != nil {
 		revel.ERROR.Println("[FAIL] InitDB, err=", err)
 	}

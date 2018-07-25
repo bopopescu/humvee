@@ -3,6 +3,8 @@ package controllers
 import (
 	"database/sql"
 
+	_ "github.com/go-sql-driver/mysql"
+
 	"github.com/revel/revel"
 	"github.com/underthepixel/humvee/app"
 )
@@ -12,8 +14,10 @@ type Account struct {
 }
 
 func (c Account) Get() revel.Result {
+	revel.INFO.Println("[TRACKING]1 called Account.Get")
 
 	id := c.Params.Get("id")
+	revel.INFO.Println("[TRACKING]2 id=", id)
 
 	//
 	var result string
@@ -29,6 +33,7 @@ func (c Account) Get() revel.Result {
 		result = data1
 	}
 
+	revel.INFO.Println("[TRACKING]3 result=", result)
 	return c.RenderText(result)
 }
 
