@@ -14,12 +14,9 @@ type Account struct {
 }
 
 func (c Account) Get() revel.Result {
-	revel.INFO.Println("[TRACKING]1 called Account.Get")
 
 	id := c.Params.Get("id")
-	revel.INFO.Println("[TRACKING]2 id=", id)
 
-	//
 	var result string
 	var data1 string
 	err := app.DB.QueryRow("select data1 from account where id=?", id).Scan(&data1)
@@ -33,7 +30,6 @@ func (c Account) Get() revel.Result {
 		result = data1
 	}
 
-	revel.INFO.Println("[TRACKING]3 result=", result)
 	return c.RenderText(result)
 }
 
