@@ -197,7 +197,7 @@ def ParseCreateOptionsBase(args):
     enable_autorepair = ((args.image_type or '').lower() in ['', 'cos'])
   flags.WarnForUnspecifiedIpAllocationPolicy(args)
   cluster_ipv4_cidr = args.cluster_ipv4_cidr
-  enable_master_authorized_networks = args.enable_master_authorized_networks
+  enable_main_authorized_networks = args.enable_main_authorized_networks
   return api_adapter.CreateClusterOptions(
       accelerators=args.accelerator,
       additional_zones=args.additional_zones,
@@ -217,7 +217,7 @@ def ParseCreateOptionsBase(args):
       enable_ip_alias=args.enable_ip_alias,
       enable_kubernetes_alpha=args.enable_kubernetes_alpha,
       enable_legacy_authorization=args.enable_legacy_authorization,
-      enable_master_authorized_networks=enable_master_authorized_networks,
+      enable_main_authorized_networks=enable_main_authorized_networks,
       enable_network_policy=args.enable_network_policy,
       image_type=args.image_type,
       image=args.image,
@@ -227,7 +227,7 @@ def ParseCreateOptionsBase(args):
       labels=args.labels,
       local_ssd_count=args.local_ssd_count,
       maintenance_window=args.maintenance_window,
-      master_authorized_networks=args.master_authorized_networks,
+      main_authorized_networks=args.main_authorized_networks,
       max_nodes=args.max_nodes,
       max_nodes_per_pool=args.max_nodes_per_pool,
       min_cpu_platform=args.min_cpu_platform,
@@ -269,7 +269,7 @@ class Create(base.CreateCommand):
     flags.AddLabelsFlag(parser)
     flags.AddLocalSSDFlag(parser)
     flags.AddMaintenanceWindowFlag(parser)
-    flags.AddMasterAuthorizedNetworksFlags(parser)
+    flags.AddMainAuthorizedNetworksFlags(parser)
     flags.AddMinCpuPlatformFlag(parser)
     flags.AddNetworkPolicyFlags(parser)
     flags.AddNodeTaintsFlag(parser)
@@ -381,7 +381,7 @@ class CreateBeta(Create):
     flags.AddLabelsFlag(parser)
     flags.AddLocalSSDFlag(parser)
     flags.AddMaintenanceWindowFlag(parser)
-    flags.AddMasterAuthorizedNetworksFlags(parser)
+    flags.AddMainAuthorizedNetworksFlags(parser)
     flags.AddMinCpuPlatformFlag(parser)
     flags.AddWorkloadMetadataFromNodeFlag(parser)
     flags.AddNetworkPolicyFlags(parser)
@@ -410,7 +410,7 @@ class CreateBeta(Create):
     ops.allow_route_overlap = args.allow_route_overlap
     ops.new_scopes_behavior = True
     ops.private_cluster = args.private_cluster
-    ops.master_ipv4_cidr = args.master_ipv4_cidr
+    ops.main_ipv4_cidr = args.main_ipv4_cidr
     ops.enable_stackdriver_kubernetes = args.enable_stackdriver_kubernetes
     ops.enable_binauthz = args.enable_binauthz
     ops.enable_tpu = args.enable_tpu
@@ -441,7 +441,7 @@ class CreateAlpha(Create):
     flags.AddLabelsFlag(parser)
     flags.AddLocalSSDAndLocalSSDVolumeConfigsFlag(parser)
     flags.AddMaintenanceWindowFlag(parser)
-    flags.AddMasterAuthorizedNetworksFlags(parser)
+    flags.AddMainAuthorizedNetworksFlags(parser)
     flags.AddMinCpuPlatformFlag(parser)
     flags.AddWorkloadMetadataFromNodeFlag(parser)
     flags.AddNetworkPolicyFlags(parser)
@@ -472,7 +472,7 @@ class CreateAlpha(Create):
     ops.enable_pod_security_policy = args.enable_pod_security_policy
     ops.allow_route_overlap = args.allow_route_overlap
     ops.private_cluster = args.private_cluster
-    ops.master_ipv4_cidr = args.master_ipv4_cidr
+    ops.main_ipv4_cidr = args.main_ipv4_cidr
     ops.new_scopes_behavior = True
     ops.enable_tpu = args.enable_tpu
     ops.tpu_ipv4_cidr = args.tpu_ipv4_cidr
